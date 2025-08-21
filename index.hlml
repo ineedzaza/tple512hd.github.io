@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPLE512 HD's web</title>
+    <!-- Link CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>TPLE512 Hd's Web</h1>
+    <button id="myButton">Click Me</button>
+    <p id="message"></p>
+
+    <!-- Link JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
