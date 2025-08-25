@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Editor Bot Example</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #111; color: #eee; padding: 20px; }
+  input, button, select { margin: 5px 0; padding: 5px; }
+  video { width: 100%; max-width: 600px; margin-top: 20px; display: block; }
+  .effect-group { border: 1px solid #444; padding: 10px; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Video Editor Bot Example</h1>
+
+<input type="file" id="videoInput" accept="video/*"><br>
+
+<div class="effect-group">
+  <h3>Wave Effect</h3>
+  Horizontal: <input type="range" id="waveH" min="0" max="1000" value="0"><br>
+  Vertical: <input type="range" id="waveV" min="0" max="1000" value="0">
+</div>
+
+<div class="effect-group">
+  <h3>Mirror Effect</h3>
+  Angle (degrees): <input type="number" id="mirrorAngle" min="0" max="360" value="0">
+</div>
+
+<div class="effect-group">
+  <h3>Shake Effect</h3>
+  Horizontal: <input type="range" id="shakeH" min="0" max="1000" value="0"><br>
+  Vertical: <input type="range" id="shakeV" min="0" max="1000" value="0">
+</div>
+
+<div class="effect-group">
+  <h3>Color Effects</h3>
+  Invert RGBA: <input type="checkbox" id="invertRGBA"><br>
+  Swap Channels: <input type="checkbox" id="swapChannels"><br>
+  HSL Adjust:<br>
+  Hue <input type="number" id="hue" min="0" max="360" value="0">
+  Saturation <input type="number" id="saturation" min="-100" max="100" value="0">
+  Luminance <input type="number" id="luminance" min="0" max="360" value="100"><br>
+  HSV Adjust:<br>
+  Hue <input type="number" id="hueHSV" min="0" max="360" value="0">
+  Saturation <input type="number" id="saturationHSV" min="-100" max="100" value="0">
+  Value <input type="number" id="valueHSV" min="0" max="1000" value="100">
+</div>
+
+<div class="effect-group">
+  <h3>Swirl Effect</h3>
+  Radius: <input type="range" id="swirlRadius" min="0" max="5" step="0.01" value="0"><br>
+  Amount: <input type="range" id="swirlAmount" min="-5.5" max="5.5" step="0.01" value="0">
+</div>
+
+<div class="effect-group">
+  <h3>Pinch/Punch Effect</h3>
+  Radius: <input type="range" id="pinchRadius" min="0" max="5" step="0.01" value="0"><br>
+  Amount: <input type="range" id="pinchAmount" min="-5.5" max="5.5" step="0.01" value="0">
+</div>
+
+<button id="applyEffects">Apply Effects</button>
+<button id="addKeyframe">Add Keyframe</button>
+
+<video id="video" controls></video>
+
+<script>
+const videoInput = document.getElementById('videoInput');
+const video = document.getElementById('video');
+const applyBtn = document.getElementById('applyEffects');
+const addKeyframeBtn = document.getElementById('addKeyframe');
+
+let keyframes = [];
+
+videoInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    video.src = URL.createObjectURL(file);
+  }
+});
+
+applyBtn.addEventListener('click', () => {
+  const effects = {
+    waveH: document.getElementById('waveH').value,
+    waveV: document.getElementById('waveV').value,
+    mirrorAngle: document.getElementById('mirrorAngle').value,
+    shakeH: document.getElementById('shakeH').value,
+    shakeV: document.getElementById('shakeV').value,
+    invertRGBA: document.getElementById('invertRGBA').checked,
+    swapChannels: document.getElementById('swapChannels').checked,
+    hsl: {
+      hue: document.getElementById('hue').value,
+      saturation: document.getElementById('saturation').value,
+      luminance: document.getElementById('luminance').value
+    },
+    hsv: {
+      hue: document.getElementById('hueHSV').value,
+      saturation: document.getElementById('saturationHSV').value,
+      value: document.getElementById('valueHSV').value
+    },
+    swirl: {
+      radius: document.getElementById('swirlRadius').value,
+      amount: document.getElementById('swirlAmount').value
+    },
+    pinch: {
+      radius: document.getElementById('pinchRadius').value,
+      amount: document.getElementById('pinchAmount').value
+    }
+  };
+  console.log("Applying Effects:", effects);
+  alert("Effects applied (console log for demo).");
+});
+
+addKeyframeBtn.addEventListener('click', () => {
+  const time = video.currentTime;
+  keyframes.push(time);
+  console.log("Keyframes:", keyframes);
+  alert(`Keyframe added at ${time.toFixed(2)}s`);
+});
+</script>
+
+</body>
+</html>
